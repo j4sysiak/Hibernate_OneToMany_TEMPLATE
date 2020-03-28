@@ -29,10 +29,7 @@ public class MainClass {
 			Employee tmpEmployee1=new Employee();
 		//	tmpEmployee.setId(1);
 			tmpEmployee1.setName("Jack");
-			
-			Employee tmpEmployee2=new Employee();
-		//	tmpEmployee.setId(2);
-			tmpEmployee2.setName("Marian");
+
 			
 		//----------- Address
 			Address address1 = new Address(); //(1, "Warzawa", "Poland");
@@ -48,7 +45,6 @@ public class MainClass {
 			
 			// save the courses
 			session.save(tmpEmployee1);
-			session.save(tmpEmployee2);
 			session.save(address1);
 			session.save(address2);
 			

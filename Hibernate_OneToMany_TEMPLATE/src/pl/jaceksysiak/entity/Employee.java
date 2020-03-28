@@ -1,10 +1,14 @@
 package pl.jaceksysiak.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,13 +23,21 @@ public class Employee {
 	@Column(name="name")
 	private String name;
 	
-//	@OneToMany(mappedBy="addresses",
-//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-//						 CascadeType.DETACH, CascadeType.REFRESH})
-//	private List<Address> addresses;
+	@OneToMany(mappedBy="employee",
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+						 CascadeType.DETACH, CascadeType.REFRESH})
+	private List<Address> addresses;
 	
 	
-    public Employee() {}
+    public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public Employee() {}
     
 	public Employee(int id, String name) {
 		this.id = id;
