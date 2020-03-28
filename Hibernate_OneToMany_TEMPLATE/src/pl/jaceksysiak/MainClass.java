@@ -19,6 +19,7 @@ public class MainClass {
 		SessionFactory factory = new Configuration()
 								.configure("hibernate.cfg.xml")
 								.addAnnotatedClass(Employee.class)
+								.addAnnotatedClass(Address.class)
 								.buildSessionFactory();
 		
 		// create session
@@ -32,11 +33,11 @@ public class MainClass {
 
 			
 		//----------- Address
-			Address address1 = new Address(); //(1, "Warzawa", "Poland");
+			Address address1 = new Address();
 			address1.setCity("Warzawa");
 			address1.setCountry("Poland");
 			
-			Address address2 = new Address(); //(2, "Washington", "USA");
+			Address address2 = new Address();
 			address1.setCity("Washington");
 			address1.setCountry("USA");
 			

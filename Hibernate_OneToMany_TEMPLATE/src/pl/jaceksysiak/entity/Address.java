@@ -1,5 +1,6 @@
 package pl.jaceksysiak.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,29 +25,18 @@ public class Address {
 	@Column(name="country")
 	private String country;
 	
-	@Column(name="employee_id")
-	private int employee_id;
-	
-	@ManyToOne
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+				 CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="employee_id")
 	private Employee employee;
 	
+	
+	
 	public Address() {}
 
-	public Address(int id, String city, String country, int employee_id) {
-		this.id = id;
+	public Address(String city, String country) {
 		this.city = city;
 		this.country = country;
-		this.employee_id = employee_id;
-	}
-
-	
-	public int getEmployee_id() {
-		return employee_id;
-	}
-
-	public void setEmployee_id(int employee_id) {
-		this.employee_id = employee_id;
 	}
 
 	public int getId() {
@@ -72,10 +62,18 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
-	
-	
-	
-	
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", city=" + city + ", country=" + country + "]";
+	}
 	
 }

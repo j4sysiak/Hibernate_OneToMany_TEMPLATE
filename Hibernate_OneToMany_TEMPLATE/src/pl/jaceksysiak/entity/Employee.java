@@ -1,5 +1,6 @@
 package pl.jaceksysiak.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,23 +25,13 @@ public class Employee {
 	private String name;
 	
 	@OneToMany(mappedBy="employee",
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-						 CascadeType.DETACH, CascadeType.REFRESH})
+			   cascade= {CascadeType.ALL})
 	private List<Address> addresses;
 	
 	
-    public List<Address> getAddresses() {
-		return addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
 	public Employee() {}
     
-	public Employee(int id, String name) {
-		this.id = id;
+	public Employee(String name) {
 		this.name = name;
 	}
 
@@ -61,20 +52,29 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+    public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
 
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + name + "]";
 	}
 
-//	public List<Address> getAddresses() {
-//		return addresses;
-//	}
-//
-//	public void setAddresses(List<Address> addresses) {
-//		this.addresses = addresses;
-//	}
-
-	
+	//!!!!!!!!!!!!!!!!!!!!IMPPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // add convenience methods for bi-directional relationship	
+	public void add(Address tmpAddress) {
+		if(addresses==null) {
+			addresses = new ArrayList<Address>();
+		}
+		
+		addresses.add(tmpAddress);
+		tmpAddress.setEmployee(this);
+	}
 	
 }
