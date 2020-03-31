@@ -21,7 +21,10 @@ public class MainClass_CreateData {
 		// create session
 		Session session = factory.getCurrentSession();
 		
-		try {	
+		try {			
+			// start a transaction
+			session.beginTransaction();
+			
 		//-----------Employee	
 			Employee tmpEmployee=new Employee("Jack");
 		//	tmpEmployee1.setName("Jack");
@@ -39,9 +42,6 @@ public class MainClass_CreateData {
 			//add addresses to employee
 			tmpEmployee.add(address1);
 			tmpEmployee.add(address2);
-			
-			// start a transaction
-			session.beginTransaction();
 			
 			// save the courses
 			session.save(tmpEmployee);
